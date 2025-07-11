@@ -5,8 +5,9 @@ import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../index.css';
 import { AppointmentFormModal } from '../components/AppointmentFormModal';
+import { Sidebar } from '../components/Sidebar';
 
 const locales = {
   'en-US': enUS,
@@ -87,37 +88,40 @@ export const CalendarPage = () => {
 
   return (
     <div className="calendar-page">
-      <h1>Appointment Calendar</h1>
+      <div className='calendar-container'>
+        <Sidebar events={events} currentDate={new Date()} />
+        
+        <Calendar
+            popup
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            selectable
+            onSelectSlot={handleSelectSlot}
+            onSelectEvent={handleSelectEvent}
+            dayPropGetter={dayPropGetter}
+            onNavigate={handleNavigate}
+            components={{
+                toolbar: CustomToolbar
+            }}
+            style={{ height: 600, margin: '50px' }}
+            views={['month']}
+        />
 
-      <Calendar
-        popup
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        selectable
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleSelectEvent}
-        dayPropGetter={dayPropGetter}
-        onNavigate={handleNavigate}
-        components={{
-            toolbar: CustomToolbar
-        }}
-        style={{ height: 600, margin: '50px' }}
-        views={['month']}
-      />
-
-      <AppointmentFormModal
-        isOpen={modalOpen}
-        onClose={() => {
-            setModalOpen(false);
-            setEditingEvent(null);
-        }}
-        selectedDate={selectedDate}
-        onSave={handleSaveAppointment}
-        editingEvent={editingEvent}
-    />
-
+        <AppointmentFormModal
+            isOpen={modalOpen}
+            onClose={() => {
+                setModalOpen(false);
+                setEditingEvent(null);
+            }}
+            selectedDate={selectedDate}
+            onSave={handleSaveAppointment}
+            editingEvent={editingEvent}
+            events={events}
+            setEvents={setEvents}
+        />
+    </div>
     </div>
   );
 };
