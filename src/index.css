@@ -1,1 +1,99 @@
 @import "tailwindcss";
+
+html,
+body {
+    width: 100%;
+    background-color: rgb(77, 151, 77);
+    color: white;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+@layer components {
+    main {
+        @apply w-full overflow-x-hidden;
+    }
+
+
+    /*LOGIN PAGE*/
+
+    .login-page {
+      @apply grid grid-cols-2 h-screen;
+
+      .login-left {
+        @apply flex flex-col justify-center items-center bg-green-600 text-white p-8;
+        
+        .login-heading {
+          @apply text-4xl font-bold mb-4;
+        }
+
+        .login-subtext {
+          @apply text-lg text-center;
+        }
+      }
+
+
+      .login-right {
+        @apply flex items-center justify-center bg-gray-100;
+      
+        .login-form {
+          @apply bg-white p-8 rounded-xl shadow space-y-4 w-1/2 h-1/2;
+          
+          .form-heading{
+            @apply text-green-600 text-3xl font-bold mb-4 text-center
+          }
+        }
+
+        .form-title {
+          @apply text-xl font-bold text-center;
+        }
+
+        .login-input {
+          @apply border text-black border-gray-300 p-2 rounded w-full;
+        }
+
+        .login-button {
+          @apply bg-green-600 text-white w-full py-2 rounded hover:bg-green-700;
+        }
+
+        .login-error {
+          @apply text-red-500 text-sm;
+        }
+      }
+
+    }
+
+    /*APPOINTMENT FORM*/
+
+    .modal-overlay {
+      @apply fixed inset-0 bg-[#00000067] flex justify-center items-center z-50;
+
+      .modal-content {
+        @apply bg-white p-6 rounded shadow w-96 space-y-4;
+
+        .modal-title {
+          @apply text-green-600 text-2xl font-bold text-center;
+        }
+
+        .appointment-form {
+          @apply flex flex-col space-y-3;
+
+          .form-input {
+            @apply border border-gray-300 p-2 rounded w-full text-black;
+          }
+
+          .form-actions {
+            @apply flex justify-between space-x-3 pt-2;
+
+            .form-save-btn {
+              @apply bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700;
+            }
+
+            .form-cancel-btn {
+              @apply bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400;
+            }
+          }
+        }
+      }
+    }
+}

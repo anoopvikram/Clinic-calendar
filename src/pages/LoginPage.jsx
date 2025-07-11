@@ -18,33 +18,39 @@ export const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <form onSubmit={handleLogin} className="login-form">
-        <h2 className="login-heading">Clinic Login</h2>
+        <div className="login-left">
+            <h2 className="login-heading">Clinic Appointment System</h2>
+            <p className="login-subtext">Manage doctor appointments with ease.</p>
+        </div>
+        <div className='login-right'>
+            <form onSubmit={handleLogin} className="login-form">
+                <h2 className="form-heading">Clinic Login</h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="login-input"
-        />
+                <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="login-input"
+                />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="login-input"
-        />
+                <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="login-input"
+                />
 
-        {error && <p className="login-error">{error}</p>}
+                {error && <p className="login-error">{error}</p>}
 
-        <button type="submit" className="login-button">
-          Login
-        </button>
-      </form>
+                <button type="submit" className="login-button">
+                    Login
+                </button>
+            </form>
+        </div>
     </div>
   );
 };
