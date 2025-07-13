@@ -8,7 +8,7 @@ body {
     scroll-behavior: smooth;
     overflow-x: hidden;
      @apply bg-cover bg-center;
-    background-image: url('/assets/hospital.png');
+    background-image: url('/assets/hospital.webp');
 }
 body {
   overflow: hidden;
