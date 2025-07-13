@@ -26,7 +26,7 @@ export const LoginPage = () => {
             <h2 className="right-heading">Clinic Appointment System</h2>
             <p className="right-subtext">Enter your credentials to continue:</p>
             <form onSubmit={handleLogin} className="login-form">
-                <h2 className="form-heading">Clinic Login</h2>
+                <h2 className="form-heading">Clinical Login</h2>
 
                 <input
                 type="email"

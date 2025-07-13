@@ -15,6 +15,9 @@ export const AppointmentFormModal = ({
   const [doctor, setDoctor] = useState('');
   const [time, setTime] = useState('');
   const [showList, setShowList] = useState(false);  //  state to toggle view list
+  const [filterDoctor, setFilterDoctor] = useState('');
+  const [filterPatient, setFilterPatient] = useState('');
+
 
   useEffect(() => {
     if (editingEvent) {
@@ -57,6 +60,15 @@ export const AppointmentFormModal = ({
   const appointmentsOnSelectedDate = events.filter(ev =>
     new Date(ev.start).toDateString() === new Date(selectedDate).toDateString()
   );
+  const filteredAppointments = appointmentsOnSelectedDate.filter((appt) => {
+  const [patientName, doctorAndTime] = appt.title.split(' with ');
+  const [doctorName] = doctorAndTime.split(' - ');
+  return (
+    (filterDoctor === '' || doctorName === filterDoctor) &&
+    (filterPatient === '' || patientName === filterPatient)
+  );
+});
+
 
   return (
     <div className="modal-overlay">
@@ -122,27 +134,55 @@ export const AppointmentFormModal = ({
 
         {/* Appointment List Section */}
         {showList && (
-          <div className="mt-4">
-            <h3 className="modal-title">Appointments on {selectedDate}</h3>
-            {appointmentsOnSelectedDate.length === 0 ? (
-              <p className="text-sm text-gray-600">No appointments scheduled.</p>
-            ) : (
-              <div className="space-y-2 mt-2 text-gray-600 max-h-64 overflow-y-auto pr-2">
-              {appointmentsOnSelectedDate.map((appt) => {
-                const [patientName, doctorAndTime] = appt.title.split(' with ');
-                const [doctorName, time] = doctorAndTime.split(' - ');
-                return (
-                  <div key={appt.id} className="border border-gray-300 rounded-xl p-3 bg-slate-50 shadow">
-                    <div><strong>Patient:</strong> {patientName}</div>
-                    <div><strong>Doctor:</strong> {doctorName}</div>
-                    <div><strong>Time:</strong> {time}</div>
-                  </div>
-                );
-              })}
+  <div className="mt-4">
+    <h3 className="modal-title">Appointments on {selectedDate}</h3>
+
+    {/* Filter controls */}
+    <div className="flex space-x-2 mt-2">
+      <select
+        onChange={(e) => setFilterDoctor(e.target.value)}
+        className="form-input w-1/2"
+        defaultValue=""
+      >
+        <option value="">All Doctors</option>
+        {doctors.map((d) => (
+          <option key={d.id} value={d.name}>{d.name}</option>
+        ))}
+      </select>
+
+      <select
+        onChange={(e) => setFilterPatient(e.target.value)}
+        className="form-input w-1/2"
+        defaultValue=""
+      >
+        <option value="">All Patients</option>
+        {patients.map((p) => (
+          <option key={p.id} value={p.name}>{p.name}</option>
+        ))}
+      </select>
+    </div>
+
+    {/* Appointment list */}
+    <div className="space-y-2 mt-4 text-gray-600 max-h-64 overflow-y-auto pr-2">
+      {filteredAppointments.length === 0 ? (
+        <p className="text-sm text-gray-600">No appointments found.</p>
+      ) : (
+        filteredAppointments.map((appt) => {
+          const [patientName, doctorAndTime] = appt.title.split(' with ');
+          const [doctorName, time] = doctorAndTime.split(' - ');
+          return (
+            <div key={appt.id} className="border border-gray-300 rounded-xl p-3 bg-slate-50 shadow">
+              <div><strong>Patient:</strong> {patientName}</div>
+              <div><strong>Doctor:</strong> {doctorName}</div>
+              <div><strong>Time:</strong> {time}</div>
             </div>
-            )}
-          </div>
-        )}
+          );
+        })
+      )}
+    </div>
+  </div>
+)}
+
 
       </div>
     </div>
