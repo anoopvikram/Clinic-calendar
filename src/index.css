@@ -7,6 +7,8 @@ body {
     color: white;
     scroll-behavior: smooth;
     overflow-x: hidden;
+     @apply bg-cover bg-center;
+    background-image: url('src/assets/hospital.png');
 }
 body {
   overflow: hidden;
@@ -43,19 +45,19 @@ body {
   @apply grid h-screen grid-cols-1 md:grid-cols-2;
 
   .login-left {
-    @apply hidden md:flex flex-col justify-center items-center bg-sky-600 text-white p-8;
+    @apply hidden md:flex flex-col justify-center items-center bg-sky-600/60 backdrop-blur-md text-white p-8;
 
     .login-heading {
-      @apply text-4xl font-bold mb-4;
+      @apply text-5xl font-bold mb-4;
     }
 
     .login-subtext {
-      @apply text-lg text-center;
+      @apply text-xl text-center;
     }
   }
 
   .login-right {
-    @apply flex items-center flex-col md:justify-center bg-sky-600 md:bg-slate-50 text-center;
+    @apply flex items-center flex-col md:justify-center bg-sky-600/60  md:bg-slate-50/90 backdrop-blur-md text-center;
 
     .right-heading{
       @apply text-white md:text-sky-600 md:hidden text-4xl font-bold mb-2 mx-10 my-10;

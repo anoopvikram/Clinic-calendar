@@ -30,6 +30,7 @@ export const CalendarPage = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [viewModalOpen, setViewModalOpen] = useState(false);
 
   // Window resize detection
   useEffect(() => {

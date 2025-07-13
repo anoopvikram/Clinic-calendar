@@ -14,6 +14,7 @@ export const AppointmentFormModal = ({
   const [patient, setPatient] = useState('');
   const [doctor, setDoctor] = useState('');
   const [time, setTime] = useState('');
+  const [showList, setShowList] = useState(false);  //  state to toggle view list
 
   useEffect(() => {
     if (editingEvent) {
@@ -51,6 +52,11 @@ export const AppointmentFormModal = ({
   };
 
   if (!isOpen) return null;
+
+  // Filter appointments for selected date
+  const appointmentsOnSelectedDate = events.filter(ev =>
+    new Date(ev.start).toDateString() === new Date(selectedDate).toDateString()
+  );
 
   return (
     <div className="modal-overlay">
@@ -104,8 +110,40 @@ export const AppointmentFormModal = ({
                 Delete
               </button>
             )}
+            <button
+              type="button"
+              onClick={() => setShowList(!showList)}
+              className="form-cancel-btn"
+            >
+              {showList ? 'Hide' : 'View'}
+            </button>
           </div>
         </form>
+
+        {/* Appointment List Section */}
+        {showList && (
+          <div className="mt-4">
+            <h3 className="modal-title">Appointments on {selectedDate}</h3>
+            {appointmentsOnSelectedDate.length === 0 ? (
+              <p className="text-sm text-gray-600">No appointments scheduled.</p>
+            ) : (
+              <div className="space-y-2 mt-2 text-gray-600 max-h-64 overflow-y-auto pr-2">
+              {appointmentsOnSelectedDate.map((appt) => {
+                const [patientName, doctorAndTime] = appt.title.split(' with ');
+                const [doctorName, time] = doctorAndTime.split(' - ');
+                return (
+                  <div key={appt.id} className="border border-gray-300 rounded-xl p-3 bg-slate-50 shadow">
+                    <div><strong>Patient:</strong> {patientName}</div>
+                    <div><strong>Doctor:</strong> {doctorName}</div>
+                    <div><strong>Time:</strong> {time}</div>
+                  </div>
+                );
+              })}
+            </div>
+            )}
+          </div>
+        )}
+
       </div>
     </div>
   );
