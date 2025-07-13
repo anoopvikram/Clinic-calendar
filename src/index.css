@@ -64,11 +64,11 @@ body {
     }
 
     .right-subtext{
-      @apply text-white md:text-sky-600  text-2xl text-center mt-20 mb-5 font-bold;
-    }
+      @apply md:hidden md:text-sky-600  text-2xl text-center mt-20 mb-5 font-bold;
+    } 
 
     .login-form {
-      @apply flex flex-col justify-center bg-white p-8 rounded-2xl shadow-xl space-y-4 w-3/4 md:w-1/2 h-fit ;
+      @apply flex flex-col justify-center bg-white p-8 rounded-2xl shadow-xl space-y-4 w-3/4 md:w-1/2 h-1/2 ;
 
       .form-heading {
         @apply text-sky-600 text-3xl font-bold mb-4 text-center;
