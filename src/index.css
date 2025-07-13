@@ -37,13 +37,13 @@ body {
   @apply bg-white text-sky-700 px-4 py-1.5 rounded-full font-semibold hover:bg-sky-100 transition;
 }
 
-    /*LOGIN PAGE*/
+  /*LOGIN PAGE*/
 
-    .login-page {
-  @apply grid grid-cols-2 h-screen;
+.login-page {
+  @apply grid h-screen grid-cols-1 md:grid-cols-2;
 
   .login-left {
-    @apply flex flex-col justify-center items-center bg-sky-600 text-white p-8;
+    @apply hidden md:flex flex-col justify-center items-center bg-sky-600 text-white p-8;
 
     .login-heading {
       @apply text-4xl font-bold mb-4;
@@ -55,10 +55,18 @@ body {
   }
 
   .login-right {
-    @apply flex items-center justify-center bg-slate-50;
+    @apply flex items-center flex-col md:justify-center bg-sky-600 md:bg-slate-50 text-center;
+
+    .right-heading{
+      @apply text-white md:text-sky-600 md:hidden text-4xl font-bold mb-2 mx-10 my-10;
+    }
+
+    .right-subtext{
+      @apply text-white md:text-sky-600  text-2xl text-center mt-20 mb-5 font-bold;
+    }
 
     .login-form {
-      @apply bg-white p-8 rounded-2xl shadow-xl space-y-4 w-1/2 h-1/2;
+      @apply flex flex-col justify-center bg-white p-8 rounded-2xl shadow-xl space-y-4 w-3/4 md:w-1/2 h-fit ;
 
       .form-heading {
         @apply text-sky-600 text-3xl font-bold mb-4 text-center;
@@ -82,6 +90,7 @@ body {
     }
   }
 }
+
 
 
     /* APPOINTMENT FORM */

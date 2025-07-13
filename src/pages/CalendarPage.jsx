@@ -51,7 +51,7 @@ export const CalendarPage = () => {
   const throttleDelay = 300;
 
   const isInsideCalendar = (el) => {
-    return el.closest('.rbc-calendar'); // class from react-big-calendar root
+    return el.closest('.rbc-calendar');
   };
 
   const handleWheel = (e) => {
