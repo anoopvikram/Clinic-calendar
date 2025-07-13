@@ -100,6 +100,21 @@ export const CalendarPage = () => {
     };
   }, [isMobile]);
 
+    // Load appointments from localStorage on mount
+    useEffect(() => {
+    const savedAppointments = localStorage.getItem('appointments');
+    if (savedAppointments) {
+      const parsedAppointments = JSON.parse(savedAppointments).map(ev => ({
+        ...ev,
+        start: new Date(ev.start),
+        end: new Date(ev.end)
+      }));
+      setEvents(parsedAppointments);
+    }
+  }, []);
+
+
+
   const CustomToolbar = ({ label }) => (
     <div className="rbc-toolbar">
       <span className="rbc-toolbar-label">{label}</span>
@@ -146,6 +161,7 @@ export const CalendarPage = () => {
       };
     }
     return {};
+    
   };
 
   // Filter appointments
